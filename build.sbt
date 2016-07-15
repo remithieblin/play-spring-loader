@@ -1,6 +1,6 @@
 
 version := "1.0-SNAPSHOT"
-organization := "com.rthieblin"
+organization := "com.actimust"
 scalaVersion := "2.11.8"
 
 name := "play-spring-loader"

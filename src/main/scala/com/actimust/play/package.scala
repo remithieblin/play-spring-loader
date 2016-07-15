@@ -1,7 +1,7 @@
-package play.api
+package com.actimust.play
 
 import scala.reflect.ClassTag
-import play.api.inject.Module
+import play.api.inject.{BindingKey, Module}
 
 /**
  * Play's runtime dependency injection abstraction.

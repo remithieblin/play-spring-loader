@@ -1,4 +1,4 @@
-package play.api.inject.spring
+package com.actimust.play.spring
 
 import java.io.File
 import java.lang.annotation.Annotation

@@ -1,4 +1,4 @@
-package play.api.inject.spring
+package com.actimust.play.spring
 
 import org.springframework.beans.MutablePropertyValues
 import org.springframework.beans.factory.config.{ConstructorArgumentValues, BeanDefinition}

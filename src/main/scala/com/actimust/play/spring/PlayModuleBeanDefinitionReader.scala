@@ -1,4 +1,4 @@
-package play.api.inject.spring
+package com.actimust.play.spring
 
 import org.springframework.beans.factory.support.DefaultListableBeanFactory
 import play.api.inject.Binding

@@ -1,4 +1,4 @@
-package play.api.inject.spring
+package com.actimust.play.spring
 
 import controllers.Assets
 import play.api.ApplicationLoader.Context
