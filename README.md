@@ -11,3 +11,24 @@ To use in your Play application project:
 2. sbt publishLocal
 3. add the dependency in your build.sbt file: "com.actimust"% "play-spring-loader" % "1.0-SNAPSHOT"
 4. configure the loader in the conf file: play.application.loader = "com.actimust.play.spring.SpringApplicationLoader"
+5. You can exclude bindings. This exclude is needed (see below for explanation): play.bindings.disabled += "play.api.libs.Crypto"
+
+
+
+
+## Explanation for the Crypto class exclude:
+
+The issue is that spring resolves dependencies by type:
+
+1/ class CSRFTokenSignerProvider @Inject() (@Named("signer") signer: CookieSigner) :
+CSRFTokenSignerProvider needs a CookieSigner.
+
+2/ bind[CookieSigner].toProvider[CookieSignerProvider]
+=> class HMACSHA1CookieSigner is a CookieSigner
+
+3/ bind[play.api.libs.Crypto].toSelf,  class Crypto @Inject() (signer: CookieSigner, tokenSigner: CSRFTokenSigner, aesCrypter: AESCrypter) extends CookieSigner
+=> class Crypto is a CookieSigner
+
+4/ Spring finds these 2 candidates for the CSRFTokenSignerProvider class because they both are of type CookieSigner. So Spring tries to construct both of them.
+
+5/ class Crypto needs a CSRFTokenSigner, which is what Spring was trying to construct in the first place.. : circular dependency.
