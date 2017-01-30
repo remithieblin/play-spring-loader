@@ -39,8 +39,8 @@ pomExtra :=
       </license>
     </licenses>
     <scm>
-      <url>https://github.com/remithieblin/play-spring-loader.git</url>
-      <connection>scm:git:git@github.com:jsuereth/scala-arm.git</connection>
+      <url>git@github.com:remithieblin/play-spring-loader.git</url>
+      <connection>scm:git:git@github.com:remithieblin/play-spring-loader.git</connection>
     </scm>
     <developers>
       <developer>
