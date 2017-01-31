@@ -1,5 +1,5 @@
 
-version := "1.0-SNAPSHOT"
+version := "1.0.0-SNAPSHOT"
 organization := "com.actimust"
 scalaVersion := "2.11.8"
 
