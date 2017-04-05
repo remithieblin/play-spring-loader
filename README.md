@@ -13,7 +13,59 @@ To use in your Play application project:
 4. configure the loader in the conf file: play.application.loader = "com.actimust.play.spring.SpringApplicationLoader"
 5. You can exclude bindings. This exclude is needed (see below for explanation): play.bindings.disabled += "play.api.libs.Crypto"
 
+Example config for `scala` based app:
 
+```sh
+play.application.loader = "com.actimust.play.spring.SpringApplicationLoader"
+
+play.modules.enabled += "com.demo.spring.MyModule"
+
+play.spring.configs += "config.AppConfig"
+play.spring.configs += "play.api.spring.CoreConfig"
+play.bindings.disabled += "play.api.libs.Crypto"
+```
+
+with:
+
+```scala
+package config
+
+import org.springframework.context.annotation.{ComponentScan, Configuration}
+
+@Configuration
+@ComponentScan(Array("com.demo.spring", "controllers"))
+class AppConfig  {
+
+}
+```
+
+Example config for `java` based app:
+
+```sh
+play.application.loader = "com.actimust.play.spring.SpringApplicationLoader"
+
+play.modules.enabled += "com.demo.spring.MyModule"
+
+# Required as workaround, see spring-application-loader docs
+play.bindings.disabled += "play.libs.Crypto"
+play.bindings.disabled += "play.api.libs.Crypto"
+play.spring.configs = ["com.example.PlaySpringDIConfiguration"]
+```
+
+with:
+
+```java
+package com.example;
+
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+@ComponentScan
+public class PlaySpringDIConfiguration {
+
+}
+```
 
 
 ## Explanation for the Crypto class exclude:
