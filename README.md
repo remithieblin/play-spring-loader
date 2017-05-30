@@ -7,11 +7,13 @@ The project targets Play 2.5.4
 
 To use in your Play application project:
 
-1. Checkout this repo locally
-2. sbt publishLocal
-3. add the dependency in your build.sbt file: "com.actimust"% "play-spring-loader" % "1.0-SNAPSHOT"
-4. configure the loader in the conf file: play.application.loader = "com.actimust.play.spring.SpringApplicationLoader"
-5. You can exclude bindings. This exclude is needed (see below for explanation): play.bindings.disabled += "play.api.libs.Crypto"
+1. add the dependency in your build.sbt file: "com.actimust"% "play-spring-loader" % "1.0-SNAPSHOT"
+2. configure the loader in the conf file: play.application.loader = "com.actimust.play.spring.SpringApplicationLoader"
+3. You can exclude bindings. This exclude is needed (see below for explanation): play.bindings.disabled += "play.api.libs.Crypto"
+
+
+The library is hosted on Sonatype. 
+
 
 Example config for `scala` based app:
 
