@@ -15,7 +15,6 @@ class SpringApplicationBuilder (
                                  disabled: Seq[Class[_]] = Seq.empty,
                                  eagerly: Boolean = false,
                                  loadConfiguration: Environment => Configuration = Configuration.load,
-                                 global: Option[GlobalSettings] = None,
                                  loadModules: (Environment, Configuration) => Seq[Module] = SpringableModule.loadModules,
                                  beanReader: PlayModuleBeanDefinitionReader = DefaultPlayModuleBeanDefinitionReader()
                                  )  extends SpringBuilder[SpringApplicationBuilder](
@@ -42,7 +41,6 @@ class SpringApplicationBuilder (
   override def prepareConfig(): SpringApplicationBuilder = {
     val initialConfiguration = loadConfiguration(environment)
     val appConfiguration = initialConfiguration ++ configuration
-    val globalSettings = global.getOrElse(GlobalSettings(appConfiguration, environment))
 
     LoggerConfigurator(environment.classLoader).foreach {
       _.configure(environment)
@@ -60,8 +58,7 @@ class SpringApplicationBuilder (
         Seq(new Module{
           def bindings(environment: Environment, configuration: Configuration) = Seq(
             bind[OptionalSourceMapper] to new OptionalSourceMapper(None),
-            bind[WebCommands] to new DefaultWebCommands,
-            bind[GlobalSettings] to globalSettings
+            bind[WebCommands] to new DefaultWebCommands
           )
         })
       )
@@ -151,8 +148,7 @@ class SpringApplicationBuilder (
                     beanReader: PlayModuleBeanDefinitionReader = beanReader,
                     eagerly: Boolean = eagerly,
                     loadConfiguration: Environment => Configuration = loadConfiguration,
-                    global: Option[GlobalSettings] = global,
                     loadModules: (Environment, Configuration) => Seq[Module] = loadModules
                     ): SpringApplicationBuilder =
-    new SpringApplicationBuilder(environment, configuration, modules, overrides, disabled, eagerly, loadConfiguration, global, loadModules, beanReader)
+    new SpringApplicationBuilder(environment, configuration, modules, overrides, disabled, eagerly, loadConfiguration, loadModules, beanReader)
 }
