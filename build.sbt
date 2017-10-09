@@ -1,7 +1,7 @@
 
-version := "1.0.0"
+version := "1.0.0-SNAPSHOT"
 organization := "com.actimust"
-scalaVersion := "2.11.8"
+scalaVersion := "2.12.3"
 
 name := "play-spring-loader"
 crossPaths := false
@@ -10,12 +10,9 @@ crossPaths := false
 lazy val root = project in file(".")
 
 libraryDependencies ++= Seq(
-  "com.typesafe.play" %% "play" % "2.5.12",
+  "com.typesafe.play" %% "play" % "2.6.6",
   "org.springframework" % "spring-context" % "4.3.5.RELEASE"
 )
-
-resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
-resolvers += "mandubian maven bintray" at "https://dl.bintray.com/mandubian/maven"
 
 publishMavenStyle := true
 
